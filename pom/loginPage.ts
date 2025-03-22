@@ -48,5 +48,6 @@ export class LoginPage {
 
     await popup.fill('input[type="password"]', pass);
     await popup.click("text=Next");
+
   }
 }

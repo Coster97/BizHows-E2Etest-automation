@@ -4,9 +4,9 @@ import * as dotenv from "dotenv";
 dotenv.config();
 
 // 구글 계정
-const existingEmail = process.env.GOOGLE_EXISTIINGEMAIL as string;
+const existingEmail = process.env.GOOGLE_EXISTINGEMAIL as string;
 const newEmail = process.env.GOOGLE_NEWEMAIL as string;
-const pass = process.env.GOOGLE_PASS as string;
+const pass = process.env.GOOGLE_PASSWORD as string;
 
 // ---------- 회원가입 > 구글 ----------
 

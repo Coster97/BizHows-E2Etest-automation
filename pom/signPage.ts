@@ -48,8 +48,7 @@ export class SignPage {
     await popup.fill('input[type="password"]', pass);
     await popup.click("text=Next");
 
-    // 비즈하우스 계정 이용 동의 "계속" 버튼이 2초 안에 나타나면 클릭, 없으면 스킵
-    if (await popup.isVisible("button:has-text('계속')", { timeout: 2000 })) {
+    if (await popup.isVisible("button:has-text('계속')", { timeout: 1000 })) {
       await popup.locator("button:has-text('계속')").click();
     } else {
     }

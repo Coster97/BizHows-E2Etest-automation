@@ -1,0 +1,49 @@
+.env
+
+# allure
+allure-report/
+allure-results/
+
+# playwright
+test-results/
+
+# Node.js 관련
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# 환경 변수 및 설정 파일
+.env
+*.env.local
+*.env.development
+*.env.production
+
+# Playwright 관련 (테스트 결과 & 캐시)
+test-results/
+trace.zip
+*.log
+*.lock
+
+# Playwright Allure Report 관련 (결과 리포트)
+allure-results/
+allure-report/
+allure-history/
+
+# GitHub Actions & CI/CD 관련
+dist/
+build/
+coverage/
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# OS 관련 파일
+*.swp
+*.swo
+*.swn
+*.swo
+*.bak
+*.tmp
+*.log

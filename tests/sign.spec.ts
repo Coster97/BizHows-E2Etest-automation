@@ -8,7 +8,7 @@ const existingEmail = process.env.GOOGLE_EXISTINGEMAIL as string;
 const newEmail = process.env.GOOGLE_NEWEMAIL as string;
 const pass = process.env.GOOGLE_PASSWORD as string;
 
-// ---------- 회원가입 > 구글 ----------
+// ---------- 구글 회원가입 ----------
 
 // test("SIGN_001: 회원가입 정상 처리 확인", async ({ page }) => {
 //   const signPage = new SignPage(page);
@@ -29,7 +29,7 @@ test("SIGN_002: 이미 가입된 계정으로 가입 시도 시, 중복 가입 �
   await signPage.goto();
   await signPage.googleJoin(existingEmail, pass);
 
-  expect(page.locator("button[data-f='MB-b42d']").nth(5)).toBeVisible();
+  expect(signPage.profileButton).toBeVisible();
 });
 
 test("SIGN_003: 필수 이용약관 미동의 시 회원가입 불가 확인", async ({

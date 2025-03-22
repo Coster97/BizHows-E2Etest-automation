@@ -16,7 +16,7 @@ test("LOGIN_001: 로그인 정상 처리 확인", async ({ page }) => {
   await loginPage.goto();
   await loginPage.googleLogin(existingEmail, pass);
 
-  expect(loginPage.profileButton).toBeVisible();
+  await expect(loginPage.loginButton).toHaveCount(0);
 });
 
 test("LOGIN_002: 미가입 계정으로 로그인 시도 시 회원가입 절차로 이동 확인", async ({

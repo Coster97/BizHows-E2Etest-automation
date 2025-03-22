@@ -10,16 +10,16 @@ const pass = process.env.GOOGLE_PASSWORD as string;
 
 // ---------- 구글 회원가입 ----------
 
-// test("SIGN_001: 회원가입 정상 처리 확인", async ({ page }) => {
-//   const signPage = new SignPage(page);
+test("SIGN_001: 회원가입 정상 처리 확인", async ({ page }) => {
+  const signPage = new SignPage(page);
 
-//   await signPage.goto();
-//   await signPage.googleJoin(newEmail, pass);
-//   await signPage.termsCheck();
-//   await signPage.fillRequiredInfo("테스터");
+  await signPage.goto();
+  await signPage.googleJoin(newEmail, pass);
+  await signPage.termsCheck();
+  await signPage.fillRequiredInfo("테스터");
 
-//   expect(signPage.termsCheckGuide).toHaveText("필수 항목에 동의해 주세요");
-// });
+  expect(signPage.termsCheckGuide).toHaveText("필수 항목에 동의해 주세요");
+});
 
 test("SIGN_002: 이미 가입된 계정으로 가입 시도 시, 중복 가입 방지 확인", async ({
   page,

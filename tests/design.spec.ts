@@ -8,7 +8,9 @@ dotenv.config();
 const existingEmail = process.env.GOOGLE_EXISTINGEMAIL as string;
 const pass = process.env.GOOGLE_PASSWORD as string;
 
-test("test", async ({ page }) => {
+test("DESIGN_001: '파일 업로드 방식' 옵션 선택 및 파일 삽입 정상 반영 확인", async ({
+  page,
+}) => {
   const loginPage = new LoginPage(page);
   const designPage = new DesignPage(page);
 

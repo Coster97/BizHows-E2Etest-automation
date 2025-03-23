@@ -29,7 +29,7 @@ Allure Report를 연동하여 테스트 결과를 시각적으로 확인할 수 
 ---
 
 ## 🛠️ 기술 스택  
-- **Test Automation: Playwright (TypeScript)
+- **Test Automation:** Playwright (TypeScript)
 - **Test Case Management:** Google Sheets  
 - **Reporting:** Allure Report  
 

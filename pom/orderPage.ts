@@ -1,7 +1,10 @@
 import { Page, Locator } from "@playwright/test";
 
 export class OrderPage {
+  // 페이지
   readonly page: Page;
+
+  // 첫 번째 상품 정보 (아이템, 이름, 옵션, 디자인옵션, 가격)
   readonly firstItem: Locator;
   readonly firstItemName: Locator;
   readonly firstItemOption: Locator;
@@ -23,6 +26,7 @@ export class OrderPage {
     this.payButton = this.page.locator("button[data-f='SB-82be']");
   }
 
+  // 첫 번째 상품 정보 리턴
   async firstItemInfo() {
     const name = await this.firstItemName.textContent();
     const option = await this.firstItemOption.textContent();

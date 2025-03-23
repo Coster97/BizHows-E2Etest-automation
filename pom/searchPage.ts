@@ -30,6 +30,7 @@ export class SearchPage {
     });
   }
 
+  // 원하는 상품 검색
   async searchItem(keyword: string) {
     await this.searchButton.waitFor({
       state: "visible",

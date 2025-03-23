@@ -1,13 +1,21 @@
 import { Page, Locator } from "@playwright/test";
 
 export class DesignPage {
+  // 페이지
   readonly page: Page;
+  // 상품 상세페이지 내 다음 버튼
   readonly nextButton: Locator;
+  // 파일 업로드 옵션
   readonly fileUploadOption: Locator;
+  // 파일 업로드 버튼
   readonly fileAddButton: Locator;
+  // 파일 업로드 인풋
   readonly fileInput: Locator;
+  // 파일 삭제 버튼
   readonly fileDelete: Locator;
+  // 장바구니 담기 버튼
   readonly addCartButton: Locator;
+  // 장바구니 페이지 타이틀
   readonly cartTitle: Locator;
 
   constructor(page: Page) {
@@ -25,13 +33,15 @@ export class DesignPage {
     this.cartTitle = page.locator("div[data-f='HD-64cd']");
   }
 
-  async selectDesignMethod() {
+  // 디자인 파일 업로드 옵션 선택
+  async selectDesignFileMethod() {
     await this.nextButton.waitFor({ state: "visible" });
     await this.nextButton.click();
     await this.fileUploadOption.waitFor({ state: "visible" });
     await this.fileUploadOption.click();
   }
 
+  // 디자인 파일 선택 및 업로드
   async selectDesignFile() {
     await this.page.$eval(
       'input[type="file"]',

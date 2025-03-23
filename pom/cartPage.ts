@@ -13,6 +13,8 @@ export class CartPage {
   readonly firstItemDesignOption: Locator;
   readonly firstItemPrice: Locator;
 
+  readonly orderButton: Locator;
+
   constructor(page: Page) {
     this.page = page;
     this.allCheckBox = page.locator("label[data-f='HC-7ac4']");
@@ -33,6 +35,10 @@ export class CartPage {
       "span[data-f='DH-44ec']"
     );
     this.firstItemPrice = this.firstItem.locator("span[data-f='UT-3003']");
+
+    this.orderButton = this.page.locator(".css-2g3mvz", {
+      hasText: "주문하기",
+    });
   }
 
   async firstItemInfo() {
@@ -43,15 +49,5 @@ export class CartPage {
 
     // 출력 예 : 기본 명함 코팅스노우 219g 파일주문 10,600원
     return `${name ?? ""} ${option ?? ""} ${designOption ?? ""} ${price ?? ""}`;
-  }
-
-  async checkItem() {
-    const getAllCheckBoxStatus = await this.allCheckBoxStatus.getAttribute(
-      "aria-checked"
-    );
-
-    if (getAllCheckBoxStatus === "false") {
-      await this.allCheckBox.click();
-    }
   }
 }

@@ -33,7 +33,7 @@ export class OptionPage {
     );
     await option.click();
 
-    await this.page.waitForTimeout(2000);
+    await this.page.waitForTimeout(3000);
 
     // 실제 반영된 옵션 값 확인 (텍스트 변경 기다림)
     return await dropdownTrigger.locator("div[data-f='OT-4420']").textContent();

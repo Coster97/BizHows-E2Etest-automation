@@ -5,6 +5,7 @@ import { OptionPage } from "../pom/optionPage";
 import { DesignPage } from "../pom/designPage";
 import * as dotenv from "dotenv";
 import { CartPage } from "../pom/cartPage";
+import { OrderPage } from "../pom/orderPage";
 dotenv.config();
 
 // 구글 계정
@@ -50,7 +51,59 @@ test("CART_001: 상품 정보 정상 표시 확인", async ({ page }) => {
   // 장바구니 내 상품 정보 확인
   const itemInfo = await cartPage.firstItemInfo();
 
-  await expect(itemInfo).toContain(
+  expect(itemInfo).toContain(
     "기본 명함 원단 : 코팅스노우 219g 파일주문 10,600원"
+  );
+});
+
+// CART_001 -> CART_002 테스트 흐름에 따라 장바구니 내 상품이 1개 존재하는 상태임
+test("CART_003: 상품 주문 절차 정상 동작 확인", async ({ page }) => {
+  const loginPage = new LoginPage(page);
+  const searchPage = new SearchPage(page);
+  const optionPage = new OptionPage(page);
+  const designPage = new DesignPage(page);
+  const cartPage = new CartPage(page);
+  const orderPage = new OrderPage(page);
+
+  // 로그인
+  await loginPage.goto();
+  await loginPage.googleLogin(existingEmail, pass);
+  await loginPage.loginButton.waitFor({
+    state: "detached",
+  });
+
+  // 상품 검색 및 선택
+  await searchPage.searchItem("기본명함");
+  await searchPage.searchResults.waitFor({
+    state: "visible",
+  });
+  await searchPage.searchResultItem.click();
+  await page.waitForURL(
+    "https://www.bizhows.com/v/option?code1=5000&code2=200&code3=3501&mock=5000_200_3501_7&from=megamenu",
+    { waitUntil: "load" }
+  );
+
+  // 상품 옵션 선택
+
+  await optionPage.selectOption("용지", "코팅스노우 219g");
+
+  // 상품 디자인 진행 방식 선택
+  await designPage.selectDesignMethod();
+  await designPage.selectDesignFile();
+  await page.waitForURL("https://www.bizhows.com/v/step3-cart", {
+    waitUntil: "load",
+  });
+
+  // 주문하기 클릭 및 주문 페이지로 이동
+  await cartPage.orderButton.click();
+  await page.waitForURL("https://www.bizhows.com/v/step4-address", {
+    waitUntil: "load",
+  });
+
+  // 주문 페이지 내 첫번째 상품 정보 확인
+  const itemInfo = await orderPage.firstItemInfo();
+
+  expect(itemInfo).toContain(
+    "기본 명함 원단 : 코팅스노우 219g 파일 주문 10,600원"
   );
 });

@@ -107,9 +107,7 @@ test("CART_002: 상품 주문 절차 정상 동작 확인", async ({ page }) => 
   );
 });
 
-test.only("CART_003: 상품 전체 선택 및 부분 선택 동작 확인", async ({
-  page,
-}) => {
+test("CART_003: 상품 전체 선택 및 부분 선택 동작 확인", async ({ page }) => {
   const loginPage = new LoginPage(page);
   const cartPage = new CartPage(page);
   const orderPage = new OrderPage(page);

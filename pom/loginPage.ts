@@ -49,5 +49,11 @@ export class LoginPage {
     await popup.fill('input[type="password"]', pass);
     await popup.click("text=Next");
 
+    // ✅ 팝업이 닫힐 때까지 기다리기
+    await new Promise<void>((resolve) => {
+      popup.once("close", () => {
+        resolve();
+      });
+    });
   }
 }

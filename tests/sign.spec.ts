@@ -17,8 +17,9 @@ const pass = process.env.GOOGLE_PASSWORD as string;
 //   await signPage.googleJoin(newEmail, pass);
 //   await signPage.termsCheck();
 //   await signPage.fillRequiredInfo("테스터");
+//   await signPage.termsModal.waitFor({ state: "detached" });
 
-//   expect(signPage.termsCheckGuide).toHaveText("필수 항목에 동의해 주세요");
+//   expect(signPage.welcomeModal).toBeVisible();
 // });
 
 test("SIGN_002: 이미 가입된 계정으로 가입 시도 시, 중복 가입 방지 확인", async ({

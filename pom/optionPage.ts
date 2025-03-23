@@ -7,14 +7,42 @@ export class OptionPage {
   readonly itemTitle: Locator;
   // 라벨 목록
   readonly labelList: Locator;
+  // 드롭다운 리스트
+  readonly dropdown: Locator;
 
   constructor(page: Page) {
     this.page = page;
     this.itemTitle = page.locator("div[data-f='DD-7627']");
     this.labelList = page.locator("div[data-f='OL-c464']");
+    this.dropdown = page.locator("div[data-f='OO-402f']");
   }
 
-  // 옵션 선택 및 적용 확인
+  // // 옵션 선택 및 적용 확인
+  // async selectOption(labelText: string, optionText: string) {
+  //   await this.labelList.waitFor({ state: "visible" });
+
+  //   const labelBlock = this.page.locator(
+  //     `div[data-f="DW-46b9"]:has(span[data-f="DT-1899"]:has-text("${labelText}"))`
+  //   );
+
+  //   const dropdownTrigger = labelBlock.locator("div[data-f='DC-ffdc']");
+  //   await dropdownTrigger.click();
+
+  //   const optionList = labelBlock.locator("div[data-f='OG-1d41']");
+  //   await optionList.waitFor({ state: "visible" });
+
+  //   const option = optionList.locator(
+  //     `div[data-f='OD-289a']:has-text("${optionText}")`
+  //   );
+  //   const setOptionText = labelBlock.locator("div[data-f='OT-4420']");
+
+  //   await this.dropdown.waitFor({ state: "visible" });
+  //   await option.click();
+  //   await this.dropdown.waitFor({ state: "detached" });
+
+  //   return await setOptionText.textContent();
+  // }
+
   async selectOption(labelText: string, optionText: string) {
     await this.labelList.waitFor({ state: "visible" });
 
@@ -22,23 +50,19 @@ export class OptionPage {
       `div[data-f="DW-46b9"]:has(span[data-f="DT-1899"]:has-text("${labelText}"))`
     );
 
-    const dropdownTrigger = labelBlock.locator("div[data-f='DC-ffdc']");
+    const dropdownTrigger = labelBlock.locator("div[data-f='OD-6f12']");
     await dropdownTrigger.click();
 
-    const optionList = labelBlock.locator("div[data-f='OG-1d41']");
-    await optionList.waitFor({ state: "visible" });
+    const dropdown = labelBlock.locator("div[data-f='OG-1d41']");
+    await dropdown.waitFor({ state: "visible" });
 
-    const option = optionList.locator(
+    const option = dropdown.locator(
       `div[data-f='OD-289a']:has-text("${optionText}")`
     );
     await option.click();
 
-    // 옵션이 설정된 상태
-    await this.page.waitForFunction(() => {
-      return window.location.href.includes("selectedOptionList");
-    });
+    const selectedOption = dropdownTrigger.locator("div[data-f='OT-4420']");
 
-    // 실제 반영된 옵션 값 확인 (텍스트 변경 기다림)
-    return await dropdownTrigger.locator("div[data-f='OT-4420']").textContent();
+    return await selectedOption.textContent();
   }
 }

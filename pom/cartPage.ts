@@ -65,9 +65,7 @@ export class CartPage {
     this.emptyCartText = this.page.locator("figcaption[data-f='SD-3b41']");
     this.addItemButton = this.page.locator("button[data-f='CB-e46e']");
 
-    this.orderButton = this.page.locator(".css-2g3mvz", {
-      hasText: "주문하기",
-    });
+    this.orderButton = this.page.locator('button:has-text("주문하기")');
   }
 
   // 전체 상품 개수 확인

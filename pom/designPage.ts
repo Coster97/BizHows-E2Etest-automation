@@ -35,9 +35,9 @@ export class DesignPage {
 
   // 디자인 파일 업로드 옵션 선택
   async selectDesignFileMethod() {
-    await this.nextButton.waitFor({ state: "visible" });
+    await this.nextButton.click({ trial: true });
     await this.nextButton.click();
-    await this.fileUploadOption.waitFor({ state: "visible" });
+    await this.fileUploadOption.click({ trial: true });
     await this.fileUploadOption.click();
   }
 
@@ -50,6 +50,7 @@ export class DesignPage {
     await this.fileInput.setInputFiles("tests/fixtures/비즈하우스.pdf");
 
     await this.fileDelete.waitFor({ state: "visible" });
+    await this.fileDelete.click({ trial: true });
     await this.addCartButton.click();
   }
 }

@@ -23,6 +23,9 @@ export class SignPage {
   readonly requiredInfo: Locator;
   // 필수 정보 제출 버튼
   readonly requiredInfoSubmmit: Locator;
+
+  // 회원가입 환영 모달
+  readonly welcomeModal: Locator;
   // 프로필 버튼
   readonly profileButton: Locator;
 
@@ -38,6 +41,7 @@ export class SignPage {
     this.requiredInput = page.locator("input[data-f='II-bd65']");
     this.requiredInfo = page.locator("div[data-f='IE-8c3f']");
     this.requiredInfoSubmmit = page.locator("button[data-f='FM-8db3']");
+    this.welcomeModal = page.locator("div[data-f='CW-80dd']");
     this.profileButton = page.locator("button[data-f='MB-b42d']").nth(5);
   }
 
@@ -70,6 +74,13 @@ export class SignPage {
       await popup.locator("button:has-text('계속')").click();
     } else {
     }
+
+    // ✅ 팝업이 닫힐 때까지 기다리기
+    await new Promise<void>((resolve) => {
+      popup.once("close", () => {
+        resolve();
+      });
+    });
   }
 
   // 회원가입 약관 동의 상태에서 제출 시도

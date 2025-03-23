@@ -4,6 +4,9 @@ export class OrderPage {
   // 페이지
   readonly page: Page;
 
+  // 주문 상품 개수
+  readonly orderItemCount: Locator;
+
   // 첫 번째 상품 정보 (아이템, 이름, 옵션, 디자인옵션, 가격)
   readonly firstItem: Locator;
   readonly firstItemName: Locator;
@@ -14,6 +17,8 @@ export class OrderPage {
 
   constructor(page: Page) {
     this.page = page;
+
+    this.orderItemCount = page.locator("span[data-f='CC-cacc']");
 
     this.firstItem = page.locator("li[data-f='CL-6fd5']").nth(0);
     this.firstItemName = this.firstItem.locator("h3[data-f='CT-ea6a']");
@@ -26,6 +31,9 @@ export class OrderPage {
     this.payButton = this.page.locator("button[data-f='SB-82be']");
   }
 
+  async orderItemCounting() {
+    return await this.orderItemCount.textContent();
+  }
   // 첫 번째 상품 정보 리턴
   async firstItemInfo() {
     const name = await this.firstItemName.textContent();

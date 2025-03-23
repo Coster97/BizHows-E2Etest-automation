@@ -107,6 +107,45 @@ test("CART_002: 상품 주문 절차 정상 동작 확인", async ({ page }) => 
   );
 });
 
+test.only("CART_003: 상품 전체 선택 및 부분 선택 동작 확인", async ({
+  page,
+}) => {
+  const loginPage = new LoginPage(page);
+  const cartPage = new CartPage(page);
+  const orderPage = new OrderPage(page);
+
+  // 로그인
+  await loginPage.goto();
+  await loginPage.googleLogin(existingEmail, pass);
+  await loginPage.loginButton.waitFor({
+    state: "detached",
+  });
+
+  // 장바구니로 이동
+  await page.goto("https://www.bizhows.com/v/step3-cart", {
+    waitUntil: "load",
+  });
+
+  // 전체 상품 개수
+  const itemCount = await cartPage.countItems();
+
+  // 전체 상품 선택
+  await cartPage.selectAllCheckBox();
+
+  // 첫번째 상품의 선택 해제
+  await cartPage.firstCheckBox.click();
+
+  // 주문하기 클릭 및 주문 페이지로 이동
+  await cartPage.orderButton.click();
+  await page.waitForURL("https://www.bizhows.com/v/step4-address", {
+    waitUntil: "load",
+  });
+
+  const orderItemsCount = await orderPage.orderItemCounting();
+
+  expect(Number(orderItemsCount)).toBe(itemCount - 1);
+});
+
 test("CART_004: 장바구니 내 상품 삭제 처리 확인", async ({ page }) => {
   const loginPage = new LoginPage(page);
   const searchPage = new SearchPage(page);

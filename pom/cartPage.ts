@@ -70,6 +70,14 @@ export class CartPage {
     });
   }
 
+  // 전체 상품 개수 확인
+  async countItems() {
+    await this.page.waitForSelector("div[data-f='UD-668d']", {
+      state: "visible",
+    });
+    return await this.page.locator("div[data-f='UD-668d']").count();
+  }
+
   // 첫 번째 상품 정보 리턴
   async firstItemInfo() {
     const name = await this.firstItemName.textContent();

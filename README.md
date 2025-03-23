@@ -40,7 +40,7 @@ Allure Report를 연동하여 테스트 결과를 시각적으로 확인할 수 
 ```sh
 npm install
 npx playwright install
-npx playwright test
+npx playwright test --workers=1
 npx allure generate allure-results --clean
 npx allure open
 ```

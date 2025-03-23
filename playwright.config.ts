@@ -5,6 +5,7 @@ export default defineConfig({
     headless: false, // 브라우저를 headless 모드에서 실행
     launchOptions: {
       args: [
+        "--disable-blink-features=AutomationControlled",
         "--disable-notifications",
         "--disable-gpu",
         "--disable-setuid-sandbox",

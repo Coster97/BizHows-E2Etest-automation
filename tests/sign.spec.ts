@@ -8,13 +8,11 @@ const existingEmail = process.env.GOOGLE_EXISTINGEMAIL as string;
 const newEmail = process.env.GOOGLE_NEWEMAIL as string;
 const pass = process.env.GOOGLE_PASSWORD as string;
 
-// ---------- 구글 회원가입 ----------
-
 // test("SIGN_001: 회원가입 정상 처리 확인", async ({ page }) => {
 //   const signPage = new SignPage(page);
 
 //   await signPage.goto();
-//   await signPage.googleJoin(newEmail, pass);
+//   await signPage.googleJoin("테스터 새 계정", "테스터 새 비밀번호");
 //   await signPage.termsCheck();
 //   await signPage.fillRequiredInfo("테스터");
 //   await signPage.termsModal.waitFor({ state: "detached" });

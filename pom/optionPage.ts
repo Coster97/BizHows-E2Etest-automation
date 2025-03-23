@@ -61,6 +61,14 @@ export class OptionPage {
     );
     await option.click();
 
+    // ✅ selectedOptionList 파라미터 붙을 때까지 기다림
+    await this.page.waitForFunction(() => {
+      return window.location.href.includes("selectedOptionList");
+    });
+
+    // ✅ 그 다음 1초 대기
+    await this.page.waitForTimeout(1000);
+
     const selectedOption = dropdownTrigger.locator("div[data-f='OT-4420']");
 
     return await selectedOption.textContent();

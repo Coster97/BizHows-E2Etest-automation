@@ -70,11 +70,6 @@ export class SignPage {
     await popup.fill('input[type="password"]', pass);
     await popup.click("text=Next");
 
-    if (await popup.isVisible("button:has-text('계속')", { timeout: 1000 })) {
-      await popup.locator("button:has-text('계속')").click();
-    } else {
-    }
-
     // ✅ 팝업이 닫힐 때까지 기다리기
     await new Promise<void>((resolve) => {
       popup.once("close", () => {

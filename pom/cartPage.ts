@@ -78,6 +78,8 @@ export class CartPage {
 
   // 첫 번째 상품 정보 리턴
   async firstItemInfo() {
+    await this.firstItemName.waitFor({ state: "attached" });
+
     const name = await this.firstItemName.textContent();
     const option = await this.firstItemOption.textContent();
     const designOption = await this.firstItemDesignOption.textContent();
@@ -101,5 +103,16 @@ export class CartPage {
     await this.deleteCheckedButton.click();
     await this.deleteConfirmModal.waitFor({ state: "visible" });
     await this.deleteConfirmButton.click();
+  }
+
+  // 쿠폰 모달 닫기
+  async closeCouponModal() {
+    const couponModalCloseButton = this.page.locator(
+      'button[data-f="UC-0f34"]'
+    );
+
+    if (await couponModalCloseButton.isVisible()) {
+      couponModalCloseButton.click();
+    }
   }
 }

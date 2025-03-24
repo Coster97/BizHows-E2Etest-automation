@@ -10,13 +10,13 @@ Allure Report를 연동하여 테스트 결과를 시각적으로 확인할 수 
 - 테스트 신뢰성을 높이기 위한 POM 구조 설계 및 역할 분리
 
 ### 🔹 **발생한 문제**  
-- 구글 소셜 로그인 팝업 핸들링의 복잡성
-- 드롭다운 및 비동기 요소 등 복잡한 UI 구조
+- 구글 소셜 로그인을 포함한 팝업 핸들링의 복잡성
+- 비동기 UI 업데이트 타이밍 문제
 - 유사하거나 중첩된 요소로 인해 셀렉터 정확도 저하
 
 ### 🔹 **대응 방향**  
-- popup context 감지를 통한 구글 로그인 처리
-- waitForSelector, waitForTimeout, expect 조합으로 안정성 확보
+- popup context 감지를 통한 제어 및 처리
+- waitForFunction, waitForTimeout, state: 'detached' 등의 전략을 적절히 조합하여 안정적인 흐름 확보
 - 중첩 요소 및 중복 셀렉터 문제는 :has(), .locator().locator() 방식으로 명확한 트리 탐색 구조 설계
 
 ### 🔹 **테스트 항목**  
@@ -36,7 +36,7 @@ Allure Report를 연동하여 테스트 결과를 시각적으로 확인할 수 
 ---
 
 ## ▶️ 실행 방법  
-(구글 로그인 세션 및 상테 공유 이슈 문제가 존재하여 workers는 1로 실행할 것)
+(구글 로그인 세션 및 상태 공유 이슈 문제가 존재하여 workers는 1로 실행할 것)
 
 ```sh
 npm install

@@ -2,9 +2,7 @@ import { test, expect } from "@playwright/test";
 import { SearchPage } from "../pom/searchPage";
 import { OptionPage } from "../pom/optionPage";
 
-test("OPTION_001: 상품 옵션 변경 및 변경 사항 반영 확인 ", async ({
-  page,
-}) => {
+test("OPTION_001: 상품 옵션 변경 및 변경 사항 반영 확인 ", async ({ page }) => {
   const searchPage = new SearchPage(page);
   const optionPage = new OptionPage(page);
 

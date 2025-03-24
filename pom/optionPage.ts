@@ -17,32 +17,6 @@ export class OptionPage {
     this.dropdown = page.locator("div[data-f='OO-402f']");
   }
 
-  // // 옵션 선택 및 적용 확인
-  // async selectOption(labelText: string, optionText: string) {
-  //   await this.labelList.waitFor({ state: "visible" });
-
-  //   const labelBlock = this.page.locator(
-  //     `div[data-f="DW-46b9"]:has(span[data-f="DT-1899"]:has-text("${labelText}"))`
-  //   );
-
-  //   const dropdownTrigger = labelBlock.locator("div[data-f='DC-ffdc']");
-  //   await dropdownTrigger.click();
-
-  //   const optionList = labelBlock.locator("div[data-f='OG-1d41']");
-  //   await optionList.waitFor({ state: "visible" });
-
-  //   const option = optionList.locator(
-  //     `div[data-f='OD-289a']:has-text("${optionText}")`
-  //   );
-  //   const setOptionText = labelBlock.locator("div[data-f='OT-4420']");
-
-  //   await this.dropdown.waitFor({ state: "visible" });
-  //   await option.click();
-  //   await this.dropdown.waitFor({ state: "detached" });
-
-  //   return await setOptionText.textContent();
-  // }
-
   async selectOption(labelText: string, optionText: string) {
     await this.labelList.waitFor({ state: "visible" });
 
